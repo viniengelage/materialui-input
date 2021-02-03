@@ -19,7 +19,7 @@ export const Container = styled.div<ContainerProps>`
   width: 300px;
   height: 40px;
   padding: 0 16px;
-  border: 0.12rem solid ${(props) => props.theme.colors.stroke};
+  border: 0.10rem solid ${(props) => props.theme.colors.stroke};
   border-radius: 3px;
   display: flex;
   align-items: center;

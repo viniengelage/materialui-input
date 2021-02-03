@@ -12,6 +12,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
 import { Input, Label, Container, InputBlock, Error } from './styles';
+import { ThemeProvider } from 'styled-components';
 
 library.add(fas);
 
@@ -20,6 +21,14 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   icon?: IconName;
   variant?: 'large' | 'custom';
+}
+
+import defaultTheme from 'styles/theme'
+
+let theme = defaultTheme;
+
+export function addInputTheme(userTheme: any) {
+  return theme = userTheme;
 }
 
 const BasicInput: React.FC<InputProps> = ({
@@ -56,34 +65,38 @@ const BasicInput: React.FC<InputProps> = ({
   }, [fieldName, registerField]);
 
   return (
-    <InputBlock>
-      <Container
-        isErrored={!!error}
-        isFilled={isFilled}
-        isFocused={isFocused}
-        variant={variant}
-      >
-        {icon && <FontAwesomeIcon icon={icon} size="sm" />}
-        <Input
-          id={name}
-          ref={inputRef}
-          defaultValue={defaultValue}
-          onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
-          variant={variant}
-          {...rest}
-        />
-        <Label
+    <ThemeProvider theme={theme}>
+
+      <InputBlock>
+        <Container
+          isErrored={!!error}
           isFilled={isFilled}
           isFocused={isFocused}
-          htmlFor={name}
           variant={variant}
         >
-          {placeholder}
-        </Label>
-      </Container>
-      {error && <Error>{error}</Error>}
-    </InputBlock>
+          {icon && <FontAwesomeIcon icon={icon} size="sm" />}
+          <Input
+            id={name}
+            ref={inputRef}
+            defaultValue={defaultValue}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
+            variant={variant}
+            {...rest}
+            />
+          <Label
+            isFilled={isFilled}
+            isFocused={isFocused}
+            htmlFor={name}
+            variant={variant}
+            >
+            {placeholder}
+          </Label>
+        </Container>
+        {error && <Error>{error}</Error>}
+      </InputBlock>
+
+    </ThemeProvider>
   );
 };
 
