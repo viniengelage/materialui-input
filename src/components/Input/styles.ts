@@ -195,7 +195,7 @@ export const Label = styled.label<ContainerProps>`
       font-size: 10px;
       transform: translateY(-20px) translateX(-5px);
       z-index: 501;
-      background: white;
+      background: ${props.theme.colors.background};
       padding: 0 4px;
       color: ${props.theme.colors.primary};
     `}
@@ -204,7 +204,7 @@ export const Label = styled.label<ContainerProps>`
       font-size: 10px;
       transform: translateY(-20px) translateX(-5px);
       z-index: 501;
-      background: white;
+      background: ${props.theme.colors.background};
       padding: 0 4px;
       color: ${props.theme.colors.primary};
     `}
