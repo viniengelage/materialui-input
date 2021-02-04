@@ -1,4 +1,4 @@
-# viniengelage-materialui-button
+# viniengelage-materialui-input
 
 > A input component list, crafted with styled-components and Unform. This a module for Vinicios Engelage's MaterialUI
 
