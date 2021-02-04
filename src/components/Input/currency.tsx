@@ -14,6 +14,9 @@ import {
   Prefix,
 } from './styles';
 
+import defaultTheme from 'styles/theme'
+import { ThemeProvider } from 'styled-components';
+
 library.add(fas);
 
 export interface InputProps {
@@ -21,11 +24,8 @@ export interface InputProps {
   placeholder?: string;
   icon?: IconName;
   prefix?: string;
-  variant?: 'large' | 'custom';
+  size?: 'default' | 'medium' | 'large' | 'flex';
 }
-
-import defaultTheme from 'styles/theme'
-import { ThemeProvider } from 'styled-components';
 
 let theme = defaultTheme;
 
@@ -37,7 +37,7 @@ const CurrencyInput: React.FC<InputProps> = ({
   name,
   placeholder,
   icon,
-  variant = 'large',
+  size = 'default',
   prefix = 'R$',
   ...rest
 }) => {
@@ -100,10 +100,10 @@ const CurrencyInput: React.FC<InputProps> = ({
           isErrored={!!error}
           isFilled={isFilled}
           isFocused={isFocused}
-          variant={variant}
+          size={size}
           >
           {prefix && (
-            <Prefix isFocused={isFocused} isFilled={isFilled}>
+            <Prefix dimension={size} isFocused={isFocused} isFilled={isFilled}>
               {prefix}
             </Prefix>
           )}
@@ -114,7 +114,7 @@ const CurrencyInput: React.FC<InputProps> = ({
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
             onChange={handleChange}
-            variant={variant}
+            dimension={size}
             fixedDecimalLength={2}
             {...rest}
             />
@@ -122,7 +122,7 @@ const CurrencyInput: React.FC<InputProps> = ({
             isFilled={isFilled}
             isFocused={isFocused}
             htmlFor={name}
-            variant={variant}
+            size={size}
             currency
             >
             {placeholder}
