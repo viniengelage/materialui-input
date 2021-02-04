@@ -18,12 +18,13 @@ import defaultTheme from 'styles/theme'
 
 library.add(fas);
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+type InputAttributes = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>
+
+export interface InputProps extends InputAttributes {
   name: string;
   placeholder?: string;
   icon?: IconName;
-  variant?: 'large' | 'custom';
-  height?: number;
+  size?: 'default' | 'medium' | 'large' | 'flex';
 }
 
 let theme = defaultTheme;
@@ -36,8 +37,7 @@ const BasicInput: React.FC<InputProps> = ({
   name,
   placeholder,
   icon,
-  variant = 'large',
-  height,
+  size = 'default',
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -74,8 +74,7 @@ const BasicInput: React.FC<InputProps> = ({
           isErrored={!!error}
           isFilled={isFilled}
           isFocused={isFocused}
-          variant={variant}
-          height={height}
+          size={size}
         >
           {icon && <FontAwesomeIcon icon={icon} size="sm" />}
           <Input
@@ -84,14 +83,14 @@ const BasicInput: React.FC<InputProps> = ({
             defaultValue={defaultValue}
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
-            variant={variant}
+            dimension={size}
             {...rest}
             />
           <Label
             isFilled={isFilled}
             isFocused={isFocused}
             htmlFor={name}
-            variant={variant}
+            size={size}
             >
             {placeholder}
           </Label>

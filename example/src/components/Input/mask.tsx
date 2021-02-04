@@ -14,12 +14,13 @@ import { ThemeProvider } from 'styled-components';
 
 library.add(fas);
 
-interface Props extends InputProps {
+type InputAttributes = Omit<InputProps, 'size'>
+
+interface Props extends InputAttributes {
   name: string;
   placeholder?: string;
   icon?: IconName;
-  variant?: 'large' | 'custom';
-  height?: number;
+  size?: 'default' | 'medium' | 'large' | 'flex';
 }
 
 let theme = defaultTheme;
@@ -33,7 +34,7 @@ const InputMask: React.FC<Props> = ({
   name,
   icon,
   placeholder,
-  variant = 'large',
+  size = 'default',
   height,
   ...rest
 }) => {
@@ -77,8 +78,7 @@ const InputMask: React.FC<Props> = ({
           isErrored={!!error}
           isFilled={isFilled}
           isFocused={isFocused}
-          variant={variant}
-          height={height}
+          size={size}
           >
           {icon && <FontAwesomeIcon icon={icon} size="sm" />}
           <MaskedInput
@@ -86,7 +86,7 @@ const InputMask: React.FC<Props> = ({
             ref={inputRef}
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
-            variant={variant}
+            dimension={size}
             defaultValue={defaultValue}
             {...rest}
             />
@@ -94,7 +94,7 @@ const InputMask: React.FC<Props> = ({
             isFilled={isFilled}
             isFocused={isFocused}
             htmlFor={name}
-            variant={variant}
+            size={size}
             >
             {placeholder}
           </Label>
