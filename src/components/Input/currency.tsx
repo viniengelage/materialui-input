@@ -25,6 +25,7 @@ export interface InputProps {
 }
 
 import defaultTheme from 'styles/theme'
+import { ThemeProvider } from 'styled-components';
 
 let theme = defaultTheme;
 
@@ -92,42 +93,46 @@ const CurrencyInput: React.FC<InputProps> = ({
   }, [fieldName, registerField]);
 
   return (
-    <InputBlock>
-      <Container
-        isErrored={!!error}
-        isFilled={isFilled}
-        isFocused={isFocused}
-        variant={variant}
-      >
-        {prefix && (
-          <Prefix isFocused={isFocused} isFilled={isFilled}>
-            {prefix}
-          </Prefix>
-        )}
-        <Currency
-          id={name}
-          ref={inputRef}
-          defaultValue={defaultValue}
-          onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
-          onChange={handleChange}
-          variant={variant}
-          fixedDecimalLength={2}
-          {...rest}
-        />
-        <Label
+    <ThemeProvider theme={theme}>
+
+      <InputBlock>
+        <Container
+          isErrored={!!error}
           isFilled={isFilled}
           isFocused={isFocused}
-          htmlFor={name}
           variant={variant}
-          currency
-        >
-          {placeholder}
-        </Label>
-        {icon && <FontAwesomeIcon icon={icon} size="sm" />}
-      </Container>
-      {error && <Error>{error}</Error>}
-    </InputBlock>
+          >
+          {prefix && (
+            <Prefix isFocused={isFocused} isFilled={isFilled}>
+              {prefix}
+            </Prefix>
+          )}
+          <Currency
+            id={name}
+            ref={inputRef}
+            defaultValue={defaultValue}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
+            onChange={handleChange}
+            variant={variant}
+            fixedDecimalLength={2}
+            {...rest}
+            />
+          <Label
+            isFilled={isFilled}
+            isFocused={isFocused}
+            htmlFor={name}
+            variant={variant}
+            currency
+            >
+            {placeholder}
+          </Label>
+          {icon && <FontAwesomeIcon icon={icon} size="sm" />}
+        </Container>
+        {error && <Error>{error}</Error>}
+      </InputBlock>
+
+    </ThemeProvider>
   );
 };
 
