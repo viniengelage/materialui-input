@@ -14,6 +14,9 @@ import {
   Prefix,
 } from './styles';
 
+import defaultTheme from 'styles/theme'
+import { ThemeProvider } from 'styled-components';
+
 library.add(fas);
 
 export interface InputProps {
@@ -22,6 +25,13 @@ export interface InputProps {
   icon?: IconName;
   prefix?: string;
   variant?: 'large' | 'custom';
+  height?: number;
+}
+
+let theme = defaultTheme;
+
+export function addCurrencyInputTheme(userTheme: any) {
+  return theme = userTheme;
 }
 
 const CurrencyInput: React.FC<InputProps> = ({
@@ -30,6 +40,7 @@ const CurrencyInput: React.FC<InputProps> = ({
   icon,
   variant = 'large',
   prefix = 'R$',
+  height,
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -84,42 +95,47 @@ const CurrencyInput: React.FC<InputProps> = ({
   }, [fieldName, registerField]);
 
   return (
-    <InputBlock>
-      <Container
-        isErrored={!!error}
-        isFilled={isFilled}
-        isFocused={isFocused}
-        variant={variant}
-      >
-        {prefix && (
-          <Prefix isFocused={isFocused} isFilled={isFilled}>
-            {prefix}
-          </Prefix>
-        )}
-        <Currency
-          id={name}
-          ref={inputRef}
-          defaultValue={defaultValue}
-          onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
-          onChange={handleChange}
-          variant={variant}
-          fixedDecimalLength={2}
-          {...rest}
-        />
-        <Label
+    <ThemeProvider theme={theme}>
+
+      <InputBlock>
+        <Container
+          isErrored={!!error}
           isFilled={isFilled}
           isFocused={isFocused}
-          htmlFor={name}
           variant={variant}
-          currency
-        >
-          {placeholder}
-        </Label>
-        {icon && <FontAwesomeIcon icon={icon} size="sm" />}
-      </Container>
-      {error && <Error>{error}</Error>}
-    </InputBlock>
+          height={height}
+          >
+          {prefix && (
+            <Prefix isFocused={isFocused} isFilled={isFilled}>
+              {prefix}
+            </Prefix>
+          )}
+          <Currency
+            id={name}
+            ref={inputRef}
+            defaultValue={defaultValue}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
+            onChange={handleChange}
+            variant={variant}
+            fixedDecimalLength={2}
+            {...rest}
+            />
+          <Label
+            isFilled={isFilled}
+            isFocused={isFocused}
+            htmlFor={name}
+            variant={variant}
+            currency
+            >
+            {placeholder}
+          </Label>
+          {icon && <FontAwesomeIcon icon={icon} size="sm" />}
+        </Container>
+        {error && <Error>{error}</Error>}
+      </InputBlock>
+
+    </ThemeProvider>
   );
 };
 

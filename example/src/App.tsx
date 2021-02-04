@@ -27,7 +27,7 @@ const Inputs:React.FC = () => {
     <Form onSubmit={() => console.log('Submit')}>
       <Basic name="basic" placeholder="Basic"/>
       <Currency name="currency" placeholder="Value"/>
-      <Masked name="masked" mask="(99) 9 9999-9999" placeholder="Cellphone"/>
+      <Masked name="masked" mask="(99) 9 9999-9999" placeholder="Cellphone" height={60}/>
     </Form>
 
     <GlobalStyle />

@@ -10,5 +10,6 @@ export default createGlobalStyle`
     }
     body{
       font-family: 'Montserrat', sans-serif;
+      background: #EBEBEB;
     }
 `;

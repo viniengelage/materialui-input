@@ -9,6 +9,9 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 
 import { Container, InputBlock, Label, Error, MaskedInput } from './styles';
 
+import defaultTheme from 'styles/theme'
+import { ThemeProvider } from 'styled-components';
+
 library.add(fas);
 
 interface Props extends InputProps {
@@ -16,12 +19,22 @@ interface Props extends InputProps {
   placeholder?: string;
   icon?: IconName;
   variant?: 'large' | 'custom';
+  height?: number;
 }
+
+let theme = defaultTheme;
+
+export function addMaskedInputTheme(userTheme: any) {
+  return theme = userTheme;
+}
+
+
 const InputMask: React.FC<Props> = ({
   name,
   icon,
   placeholder,
   variant = 'large',
+  height,
   ...rest
 }) => {
   const inputRef = useRef<any>(null);
@@ -57,34 +70,38 @@ const InputMask: React.FC<Props> = ({
     });
   }, [fieldName, registerField]);
   return (
-    <InputBlock>
-      <Container
-        isErrored={!!error}
-        isFilled={isFilled}
-        isFocused={isFocused}
-        variant={variant}
-      >
-        {icon && <FontAwesomeIcon icon={icon} size="sm" />}
-        <MaskedInput
-          id={name}
-          ref={inputRef}
-          onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
-          variant={variant}
-          defaultValue={defaultValue}
-          {...rest}
-        />
-        <Label
+    <ThemeProvider theme={theme}>
+
+      <InputBlock>
+        <Container
+          isErrored={!!error}
           isFilled={isFilled}
           isFocused={isFocused}
-          htmlFor={name}
           variant={variant}
-        >
-          {placeholder}
-        </Label>
-      </Container>
-      {error && <Error>{error}</Error>}
-    </InputBlock>
+          height={height}
+          >
+          {icon && <FontAwesomeIcon icon={icon} size="sm" />}
+          <MaskedInput
+            id={name}
+            ref={inputRef}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
+            variant={variant}
+            defaultValue={defaultValue}
+            {...rest}
+            />
+          <Label
+            isFilled={isFilled}
+            isFocused={isFocused}
+            htmlFor={name}
+            variant={variant}
+            >
+            {placeholder}
+          </Label>
+        </Container>
+        {error && <Error>{error}</Error>}
+      </InputBlock>
+    </ThemeProvider>
   );
 };
 export default InputMask;

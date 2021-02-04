@@ -8,6 +8,7 @@ interface ContainerProps {
   isErrored?: boolean;
   currency?: boolean;
   variant?: 'large' | 'custom';
+  height?: number;
 }
 
 export const InputBlock = styled.div`
@@ -24,6 +25,7 @@ export const Container = styled.div<ContainerProps>`
   display: flex;
   align-items: center;
   margin-bottom: 0;
+
   &:before {
     content: '';
     background-color: ${(props) => props.theme.colors.stroke};
@@ -41,6 +43,14 @@ export const Container = styled.div<ContainerProps>`
     right: 16px;
     color: ${(props) => props.theme.colors.stroke};
   }
+
+  ${props => props.height && css`
+    height: ${props.height}px;
+
+    &:before{
+      height: ${props.height}px;
+    }
+  `}
 
   ${(props) =>
     props.variant === 'custom' &&
@@ -174,7 +184,7 @@ export const Input = styled.input<ContainerProps>`
 
 export const Label = styled.label<ContainerProps>`
   position: absolute;
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.background};
   padding: 0 4px;
   color: ${(props) => props.theme.colors.stroke};
   font-size: 14px;
@@ -193,18 +203,18 @@ export const Label = styled.label<ContainerProps>`
 
   ${props => props.isFocused && css`
       font-size: 10px;
-      transform: translateY(-20px) translateX(-5px);
+      transform: translateY(-1.2rem) translateX(-5px);
       z-index: 501;
-      background: white;
+      background: ${props.theme.colors.background};
       padding: 0 4px;
       color: ${props.theme.colors.primary};
     `}
 
     ${props => props.isFilled && css`
       font-size: 10px;
-      transform: translateY(-20px) translateX(-5px);
+      transform: translateY(-1.2rem) translateX(-5px);
       z-index: 501;
-      background: white;
+      background: ${props.theme.colors.background};
       padding: 0 4px;
       color: ${props.theme.colors.primary};
     `}
