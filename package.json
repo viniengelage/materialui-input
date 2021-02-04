@@ -1,6 +1,6 @@
 {
   "name": "@viniengelage/materialui-input",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A input component list, crafted with styled-components and Unform. This a module for Vinicios Engelage's MaterialUI",
   "author": "viniengelage",
   "license": "MIT",
