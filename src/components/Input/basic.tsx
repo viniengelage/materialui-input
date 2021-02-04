@@ -27,7 +27,7 @@ import defaultTheme from 'styles/theme'
 
 let theme = defaultTheme;
 
-export function addInputTheme(userTheme: any) {
+export function addBasicInputTheme(userTheme: any) {
   return theme = userTheme;
 }
 

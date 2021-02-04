@@ -24,6 +24,14 @@ export interface InputProps {
   variant?: 'large' | 'custom';
 }
 
+import defaultTheme from 'styles/theme'
+
+let theme = defaultTheme;
+
+export function addCurrencyInputTheme(userTheme: any) {
+  return theme = userTheme;
+}
+
 const CurrencyInput: React.FC<InputProps> = ({
   name,
   placeholder,

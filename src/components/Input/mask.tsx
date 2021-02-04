@@ -17,6 +17,16 @@ interface Props extends InputProps {
   icon?: IconName;
   variant?: 'large' | 'custom';
 }
+
+import defaultTheme from 'styles/theme'
+
+let theme = defaultTheme;
+
+export function addMaskedInputTheme(userTheme: any) {
+  return theme = userTheme;
+}
+
+
 const InputMask: React.FC<Props> = ({
   name,
   icon,

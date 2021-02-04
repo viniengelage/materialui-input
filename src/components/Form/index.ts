@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { Form as Unform } from '@unform/web';
 
 interface FormProps{
-  dimension?: 'small' | 'medium' | 'large' | 'custom'
+  dimension?: 'small' | 'medium' | 'large' | 'custom';
 }
 
 const Form = styled(Unform)<FormProps>`
