@@ -174,7 +174,7 @@ export const Input = styled.input<ContainerProps>`
 
 export const Label = styled.label<ContainerProps>`
   position: absolute;
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.background};
   padding: 0 4px;
   color: ${(props) => props.theme.colors.stroke};
   font-size: 14px;
