@@ -18,12 +18,13 @@ import defaultTheme from 'styles/theme'
 
 library.add(fas);
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+type InputAttributes = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>
+
+export interface InputProps extends InputAttributes {
   name: string;
   placeholder?: string;
   icon?: IconName;
-  variant?: 'large' | 'custom';
-  height?: number;
+  size?: 'default' | 'medium' | 'large' | 'flex';
 }
 
 let theme = defaultTheme;
@@ -36,8 +37,7 @@ const BasicInput: React.FC<InputProps> = ({
   name,
   placeholder,
   icon,
-  variant = 'large',
-  height,
+  size = 'default',
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);

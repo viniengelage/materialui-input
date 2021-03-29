@@ -24,8 +24,7 @@ export interface InputProps {
   placeholder?: string;
   icon?: IconName;
   prefix?: string;
-  variant?: 'large' | 'custom';
-  height?: number;
+  size?: 'default' | 'medium' | 'large' | 'flex';
 }
 
 let theme = defaultTheme;
@@ -38,9 +37,8 @@ const CurrencyInput: React.FC<InputProps> = ({
   name,
   placeholder,
   icon,
-  variant = 'large',
+  size = 'default',
   prefix = 'R$',
-  height,
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -102,11 +100,10 @@ const CurrencyInput: React.FC<InputProps> = ({
           isErrored={!!error}
           isFilled={isFilled}
           isFocused={isFocused}
-          variant={variant}
-          height={height}
+          size={size}
           >
           {prefix && (
-            <Prefix isFocused={isFocused} isFilled={isFilled}>
+            <Prefix dimension={size} isFocused={isFocused} isFilled={isFilled}>
               {prefix}
             </Prefix>
           )}
@@ -117,7 +114,7 @@ const CurrencyInput: React.FC<InputProps> = ({
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
             onChange={handleChange}
-            variant={variant}
+            dimension={size}
             fixedDecimalLength={2}
             {...rest}
             />
@@ -125,7 +122,7 @@ const CurrencyInput: React.FC<InputProps> = ({
             isFilled={isFilled}
             isFocused={isFocused}
             htmlFor={name}
-            variant={variant}
+            size={size}
             currency
             >
             {placeholder}

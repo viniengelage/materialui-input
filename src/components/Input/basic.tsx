@@ -14,16 +14,18 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { Input, Label, Container, InputBlock, Error } from './styles';
 import { ThemeProvider } from 'styled-components';
 
+import defaultTheme from 'styles/theme'
+
 library.add(fas);
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+type InputAttributes = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>
+
+export interface InputProps extends InputAttributes {
   name: string;
   placeholder?: string;
   icon?: IconName;
-  variant?: 'large' | 'custom';
+  size?: 'default' | 'medium' | 'large' | 'flex';
 }
-
-import defaultTheme from 'styles/theme'
 
 let theme = defaultTheme;
 
@@ -35,7 +37,7 @@ const BasicInput: React.FC<InputProps> = ({
   name,
   placeholder,
   icon,
-  variant = 'large',
+  size = 'default',
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -72,7 +74,7 @@ const BasicInput: React.FC<InputProps> = ({
           isErrored={!!error}
           isFilled={isFilled}
           isFocused={isFocused}
-          variant={variant}
+          size={size}
         >
           {icon && <FontAwesomeIcon icon={icon} size="sm" />}
           <Input
@@ -81,14 +83,14 @@ const BasicInput: React.FC<InputProps> = ({
             defaultValue={defaultValue}
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
-            variant={variant}
+            dimension={size}
             {...rest}
             />
           <Label
             isFilled={isFilled}
             isFocused={isFocused}
             htmlFor={name}
-            variant={variant}
+            size={size}
             >
             {placeholder}
           </Label>

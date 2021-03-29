@@ -2,7 +2,7 @@ import React from 'react';
 
 import Form from 'components/Form'
 
-import Basic from 'components/Input/basic'
+import Basic, {addBasicInputTheme} from 'components/Input/basic'
 import Currency from 'components/Input/currency';
 import Masked from 'components/Input/mask';
 
@@ -18,9 +18,11 @@ export function addInputTheme(userTheme: any) {
   return theme = userTheme;
 }
 
-addInputTheme(exampleTheme)
+addBasicInputTheme(exampleTheme)
+
 
 const Inputs:React.FC = () => {
+  addInputTheme(exampleTheme)
   return(
     <ThemeProvider theme={theme}>
 
