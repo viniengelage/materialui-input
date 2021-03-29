@@ -74,8 +74,6 @@ const BasicInput: React.FC<InputProps> = ({
           isErrored={!!error}
           isFilled={isFilled}
           isFocused={isFocused}
-          variant={variant}
-          height={height}
         >
           {icon && <FontAwesomeIcon icon={icon} size="sm" />}
           <Input
@@ -84,14 +82,12 @@ const BasicInput: React.FC<InputProps> = ({
             defaultValue={defaultValue}
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
-            variant={variant}
             {...rest}
             />
           <Label
             isFilled={isFilled}
             isFocused={isFocused}
             htmlFor={name}
-            variant={variant}
             >
             {placeholder}
           </Label>

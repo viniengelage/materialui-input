@@ -7,6 +7,7 @@ export default createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         font-family: 'Montserrat', sans-serif;
+        -webkit-font-smoothing: antialiased;
     }
     body{
       font-family: 'Montserrat', sans-serif;

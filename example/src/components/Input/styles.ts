@@ -13,50 +13,26 @@ interface ContainerProps {
 
 export const InputBlock = styled.div`
   margin: 8px;
+  width: 100%;
 `;
 
 export const Container = styled.div<ContainerProps>`
   position: relative;
-  width: 300px;
-  height: 40px;
+  height: 50px;
   padding: 0 16px;
-  border: 0.10rem solid ${(props) => props.theme.colors.stroke};
-  border-radius: 3px;
+  border: 0.12rem solid ${(props) => props.theme.colors.stroke};
+  border-radius: 6px;
   display: flex;
   align-items: center;
   margin-bottom: 0;
+  box-shadow: -2px 3px 3px rgba(0, 0, 0, 0.1)
 
-  &:before {
-    content: '';
-    background-color: ${(props) => props.theme.colors.stroke};
-    position: absolute;
-    width: 6px;
-    height: 40px;
-    left: -2px;
-    z-index: 10;
-    border-radius: 3px 0 0 3px;
-    padding: 0;
-  }
   svg {
     position: absolute;
     z-index: 10;
     right: 16px;
     color: ${(props) => props.theme.colors.stroke};
   }
-
-  ${props => props.height && css`
-    height: ${props.height}px;
-
-    &:before{
-      height: ${props.height}px;
-    }
-  `}
-
-  ${(props) =>
-    props.variant === 'custom' &&
-    css`
-      width: 100%;
-    `}
 
   ${(props) =>
     props.isErrored &&
@@ -169,7 +145,9 @@ export const Input = styled.input<ContainerProps>`
   z-index: 1;
   border: none;
   padding: 0 40px 0 16px;
-  font-size: 10px;
+  font-size: 10pt;
+  font-smooth: always;
+  font-weight: 500;
 
   ${(props) =>
     props.variant === 'large' &&
@@ -194,6 +172,9 @@ export const Label = styled.label<ContainerProps>`
 
   transition: all 0.2s ease;
   z-index: 100;
+  font-weight: 500;
+
+  cursor: text;
 
   ${(props) =>
     props.currency &&
@@ -203,7 +184,7 @@ export const Label = styled.label<ContainerProps>`
 
   ${props => props.isFocused && css`
       font-size: 10px;
-      transform: translateY(-1.2rem) translateX(-5px);
+      transform: translateY(-1.6rem) translateX(-5px);
       z-index: 501;
       background: ${props.theme.colors.background};
       padding: 0 4px;
@@ -212,7 +193,7 @@ export const Label = styled.label<ContainerProps>`
 
     ${props => props.isFilled && css`
       font-size: 10px;
-      transform: translateY(-1.2rem) translateX(-5px);
+      transform: translateY(-1.6rem) translateX(-5px);
       z-index: 501;
       background: ${props.theme.colors.background};
       padding: 0 4px;
